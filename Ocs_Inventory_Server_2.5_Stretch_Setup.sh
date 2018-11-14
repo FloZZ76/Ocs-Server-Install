@@ -228,6 +228,7 @@ if [[ "$sethttps" == "y" ]] || [[ "$sethttps" == "Y" ]] || [[ "$sethttps" == "ye
                 Options +FollowSymlinks
         </Directory>
 </VirtualHost>" >/etc/apache2/sites-available/$ndomaine.conf
+	sed -i '23c#Alias /ocsreports /usr/share/ocsinventory-reports/ocsreports' /etc/apache2/conf-available/ocsinventory-reports.conf
 	a2enmod ssl rewrite
 	a2ensite $ndomaine
 	systemctl restart apache2
@@ -247,7 +248,7 @@ if [[ -e /etc/apache2/sites-available/$ndomaine.conf ]]; then
 	echo "| un 'rm /usr/share/ocsinventory-reports/ocsreports/install.php'                      "
 	echo "| - Les identifiants SQL pour la base $namesql sont stockés dans                      "
 	echo "| '/etc/apache2/conf-available/z-ocsinventory-server.conf'                            "
-	echo "| - L'hôte virtuel est configurer dans /etc/apache2/sites-available/$ndomaine.conf    "
+	echo "| - L'hôte virtuel est configuré dans /etc/apache2/sites-available/$ndomaine.conf    "
 	echo "| Acheter le nom de domaine $ndomaine ou configurer serveur DNS ou fichiers hosts	    "
 	echo "| &&	Rendez-vous sur https://$ndomaine					    "
 	echo "+ --------------------------------------------------------------------------------- + "
